@@ -40,6 +40,7 @@
 /* ============================================================
  * ТАЙМИНГИ
  * ============================================================ */
+
 #define TAPPING_TERM 210
 #define QUICK_TAP    150
 #define COMBO_TERM    40
@@ -47,6 +48,7 @@
 /* ============================================================
  * СЛОИ
  * ============================================================ */
+
 #define DEF 0
 #define LOW 1
 #define RSE 2
@@ -57,9 +59,10 @@
     /* ==========================================================
      * ПОВЕДЕНИЯ
      * ========================================================== */
-    behaviors {
 
+    behaviors {
         /* Homerow Mods — balanced для минимума случайных срабатываний */
+
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
@@ -71,6 +74,7 @@
         };
 
         /* Thumb: tap=key hold=layer */
+
         lt_tp: layer_tap_thumb {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_THUMB";
@@ -82,6 +86,7 @@
         };
 
         /* Space / VIM layer */
+
         spc_vim: space_vim {
             compatible = "zmk,behavior-hold-tap";
             label = "SPACE_VIM";
@@ -93,24 +98,29 @@
         };
 
         /* ESC при обычном нажатии, ~ при Shift (нужно в NeoVim) */
+
         esc_tilde: esc_tilde {
             compatible = "zmk,behavior-mod-morph";
             label = "ESC_TILDE";
             #binding-cells = <0>;
             bindings = <&kp ESC>, <&kp TILDE>;
+
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         /* Backspace / Shift+Bsp = Delete */
+
         bsp_del: bsp_del {
             compatible = "zmk,behavior-mod-morph";
             label = "BSP_DEL";
             #binding-cells = <0>;
             bindings = <&kp BACKSPACE>, <&kp DELETE>;
+
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         /* Tap-Dance: одно нажатие ( , двойное ) */
+
         td_par: tap_dance_parens {
             compatible = "zmk,behavior-tap-dance";
             label = "TD_PARENS";
@@ -120,6 +130,7 @@
         };
 
         /* Tap-Dance: [ / ] */
+
         td_bkt: tap_dance_brackets {
             compatible = "zmk,behavior-tap-dance";
             label = "TD_BRACKETS";
@@ -129,6 +140,7 @@
         };
 
         /* Tap-Dance: { / } */
+
         td_brc: tap_dance_braces {
             compatible = "zmk,behavior-tap-dance";
             label = "TD_BRACES";
@@ -138,6 +150,7 @@
         };
 
         /* Caps Word — умный CapsLock для КОНСТАНТANT_NAMES */
+
         caps_word: caps_word {
             compatible = "zmk,behavior-caps-word";
             label = "CAPS_WORD";
@@ -149,12 +162,14 @@
     /* ==========================================================
      * МАКРОСЫ
      * ========================================================== */
+
     macros {
         /*
          * ПЕРЕКЛЮЧЕНИЕ RU/EN
          * Omarchy использует Left Alt + Right Alt (grp:alts_toggle)
          * Нажимаем LAlt, затем RAlt, отпускаем оба
          */
+
         lang_switch: lang_switch {
             label = "LANG_SWITCH";
             compatible = "zmk,behavior-macro";
@@ -162,14 +177,19 @@
             wait-ms = <10>;
             tap-ms = <10>;
             bindings =
-                <&macro_press &kp LALT>,
-                <&macro_press &kp RALT>,
+                <&macro_press>,
+                <&kp LALT>,
+                <&macro_press>,
+                <&kp RALT>,
                 <&macro_pause_for_release>,
-                <&macro_release &kp RALT>,
-                <&macro_release &kp LALT>;
+                <&macro_release>,
+                <&kp RALT>,
+                <&macro_release>,
+                <&kp LALT>;
         };
 
         /* Go: := */
+
         go_decl: go_decl {
             label = "GO_DECL";
             compatible = "zmk,behavior-macro";
@@ -178,6 +198,7 @@
         };
 
         /* Go: -> */
+
         go_arrow: go_arrow {
             label = "GO_ARROW";
             compatible = "zmk,behavior-macro";
@@ -186,33 +207,28 @@
         };
 
         /* Go: if err != nil { */
+
         go_err: go_err {
             label = "GO_ERR";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings =
-                <&kp I &kp F &kp SPACE
-                 &kp E &kp R &kp R &kp SPACE
-                 &kp EXCL &kp EQUAL &kp SPACE
-                 &kp N &kp I &kp L &kp SPACE
-                 &kp LBRC &kp ENTER>;
+            bindings = <&kp I &kp F &kp SPACE &kp E &kp R &kp R &kp SPACE &kp EXCL &kp EQUAL &kp SPACE &kp N &kp I &kp L &kp SPACE &kp LBRC &kp ENTER>;
         };
 
         /* Go: fmt.Println( */
+
         go_println: go_println {
             label = "GO_PRINTLN";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings =
-                <&kp F &kp M &kp T &kp DOT
-                 &kp P &kp R &kp I &kp N &kp T &kp L &kp N
-                 &kp LPAR>;
+            bindings = <&kp F &kp M &kp T &kp DOT &kp P &kp R &kp I &kp N &kp T &kp L &kp N &kp LPAR>;
         };
 
         /*
          * Omarchy: открыть Neovim
          * Super + Shift + N — не конфликтует с нашим homerow Super
          */
+
         omarchy_nvim: omarchy_nvim {
             label = "OMARCHY_NVIM";
             compatible = "zmk,behavior-macro";
@@ -224,6 +240,7 @@
          * Omarchy: App Launcher
          * Super + Space
          */
+
         omarchy_launch: omarchy_launch {
             label = "OMARCHY_LAUNCH";
             compatible = "zmk,behavior-macro";
@@ -235,10 +252,12 @@
     /* ==========================================================
      * КОМБО
      * ========================================================== */
+
     combos {
         compatible = "zmk,combos";
 
         /* jk → ESC (NeoVim классика) */
+
         combo_esc {
             timeout-ms = <COMBO_TERM>;
             key-positions = <31 32>; // J K
@@ -250,8 +269,8 @@
          * Позиции: LALT-thumb (46) + правый thumb рядом
          * Проще и надёжнее через макрос lang_switch на одну кнопку в LOWER
          */
-
         /* sd → Caps Word (для SCREAMING_SNAKE в Go) */
+
         combo_caps_word {
             timeout-ms = <COMBO_TERM>;
             key-positions = <26 27>; // S D
@@ -260,6 +279,7 @@
         };
 
         /* nm → _ (underscore — часто в Go) */
+
         combo_under {
             timeout-ms = <COMBO_TERM>;
             key-positions = <39 40>; // N M
@@ -268,6 +288,7 @@
         };
 
         /* ;' → \ (backslash — пути, vim, regex) */
+
         combo_bslh {
             timeout-ms = <COMBO_TERM>;
             key-positions = <35 36>; // ; '
@@ -276,6 +297,7 @@
         };
 
         /* zx → Ctrl+Z (undo) */
+
         combo_undo {
             timeout-ms = <COMBO_TERM>;
             key-positions = <22 23>; // Z X
@@ -284,11 +306,13 @@
         };
 
         /* cv → Ctrl+C (copy — без Super, работает в терминале) */
+
         combo_copy {
             timeout-ms = <COMBO_TERM>;
             key-positions = <25 26>; // C V — нет, используем другую пару
             /* Omarchy имеет Super+C для копирования, но в терминале нужен Ctrl+Shift+C */
             /* Используем вместо этого комбо для lang_switch */
+
             bindings = <&lang_switch>;
             layers = <DEF>;
         };
@@ -297,6 +321,7 @@
     /* ==========================================================
      * KEYMAP
      * ========================================================== */
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -319,14 +344,16 @@
          *
          * Homerow: A=LAlt S=LSuper D=LCtrl F=LShift (и зеркально справа)
          * ---------------------------------------------------------- */
+
         default_layer {
             bindings = <
-&esc_tilde  &kp N1       &kp N2       &kp N3        &kp N4        &kp N5                          &kp N6  &kp N7        &kp N8        &kp N9       &kp N0          &kp GRAVE
-&kp TAB     &kp Q        &kp W        &kp E         &kp R         &kp T                           &kp Y   &kp U         &kp I         &kp O        &kp P           &kp MINUS
-&kp LSHIFT  &hm LALT A   &hm LGUI S   &hm LCTRL D   &hm LSHIFT F  &kp G                           &kp H   &hm RSHIFT J  &hm RCTRL K   &hm RGUI L   &hm RALT SEMI   &kp SQT
-&kp LCTRL   &kp Z        &kp X        &kp C         &kp V         &kp B   &td_bkt     &td_brc      &kp N   &kp M         &kp COMMA     &kp DOT      &kp FSLH        &kp DEL
-                                       &kp LALT      &kp LGUI      &lt_tp LOW TAB  &spc_vim VIM SPACE  &lt_tp RSE RET  &bsp_del
+&esc_tilde  &kp N1      &kp N2      &kp N3       &kp N4        &kp N5                                                &kp N6    &kp N7        &kp N8       &kp N9      &kp N0         &kp GRAVE
+&kp TAB     &kp Q       &kp W       &kp E        &kp R         &kp T                                                 &kp Y     &kp U         &kp I        &kp O       &kp P          &kp MINUS
+&kp LSHIFT  &hm LALT A  &hm LGUI S  &hm LCTRL D  &hm LSHIFT F  &kp G                                                 &kp H     &hm RSHIFT J  &hm RCTRL K  &hm RGUI L  &hm RALT SEMI  &kp SQT
+&kp LCTRL   &kp Z       &kp X       &kp C        &kp V         &kp B           &td_bkt               &td_brc         &kp N     &kp M         &kp COMMA    &kp DOT     &kp FSLH       &kp DEL
+                                    &kp LALT     &kp LGUI      &lt_tp LOW TAB  &spc_vim VIM SPACE    &lt_tp RSE RET  &bsp_del
             >;
+
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
@@ -338,14 +365,16 @@
          *
          * Go-макросы: Z=:=  X=->  C=err  V=println
          * ---------------------------------------------------------- */
+
         lower_layer {
             bindings = <
-&trans        &kp F1       &kp F2      &kp F3        &kp F4        &kp F5                          &kp F6    &kp F7     &kp F8      &kp F9    &kp F10   &kp F11
-&kp GRAVE     &kp EXCL     &kp AT      &kp HASH      &kp DOLLAR    &kp PRCNT                       &kp CARET &kp AMPS   &kp ASTRK   &kp LPAR  &kp RPAR  &kp F12
-&trans        &kp TILDE    &kp PIPE    &kp BSLH      &kp COLON     &kp SEMI                        &kp MINUS &kp EQUAL  &kp PLUS    &kp LBRC  &kp RBRC  &kp TILDE
-&trans        &go_decl     &go_arrow   &go_err       &go_println   &trans   &trans      &trans      &kp UNDER &kp LT     &kp GT      &kp LBKT  &kp RBKT  &trans
-                                        &trans        &trans        &trans   &lang_switch  &mo ADJ   &trans
+&trans     &kp F1     &kp F2     &kp F3    &kp F4       &kp F5                              &kp F6     &kp F7     &kp F8     &kp F9    &kp F10   &kp F11
+&kp GRAVE  &kp EXCL   &kp AT     &kp HASH  &kp DOLLAR   &kp PRCNT                           &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp F12
+&trans     &kp TILDE  &kp PIPE   &kp BSLH  &kp COLON    &kp SEMI                            &kp MINUS  &kp EQUAL  &kp PLUS   &kp LBRC  &kp RBRC  &kp TILDE
+&trans     &go_decl   &go_arrow  &go_err   &go_println  &trans     &trans          &trans   &kp UNDER  &kp LT     &kp GT     &kp LBKT  &kp RBKT  &trans
+                                 &trans    &trans       &trans     &lang_switch    &mo ADJ  &trans
             >;
+
             sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
@@ -355,14 +384,16 @@
          * Навигация: стандартные стрелки + Home/End/PgUp/PgDn
          * Omarchy shortcuts: удобный доступ к Super+* без homerow
          * ---------------------------------------------------------- */
+
         raise_layer {
             bindings = <
-&trans      &trans       &trans      &trans        &trans        &trans                          &trans      &trans      &trans      &trans      &trans      &trans
-&kp LBKT    &kp RBKT     &kp N7      &kp N8        &kp N9        &kp ASTRK                       &kp PG_UP   &kp HOME    &kp UP      &kp END     &kp INS     &trans
-&kp LBRC    &kp RBRC     &kp N4      &kp N5        &kp N6        &kp MINUS                       &kp PG_DN   &kp LEFT    &kp DOWN    &kp RIGHT   &kp PSCRN   &trans
-&kp LPAR    &kp RPAR     &kp N1      &kp N2        &kp N3        &kp PLUS  &trans      &trans     &trans      &kp C_MUTE  &kp C_VOLD  &kp C_VOLU  &trans      &trans
-                                      &trans        &kp N0        &mo ADJ   &kp RET     &trans    &trans
+&trans    &trans    &trans  &trans  &trans  &trans                        &trans     &trans      &trans             &trans           &trans     &trans
+&kp LBKT  &kp RBKT  &kp N7  &kp N8  &kp N9  &kp ASTRK                     &kp PG_UP  &kp HOME    &kp UP             &kp END          &kp INS    &trans
+&kp LBRC  &kp RBRC  &kp N4  &kp N5  &kp N6  &kp MINUS                     &kp PG_DN  &kp LEFT    &kp DOWN           &kp RIGHT        &kp PSCRN  &trans
+&kp LPAR  &kp RPAR  &kp N1  &kp N2  &kp N3  &kp PLUS   &trans     &trans  &trans     &kp C_MUTE  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &trans     &trans
+                            &trans  &kp N0  &mo ADJ    &kp RET    &trans  &trans
             >;
+
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
@@ -373,14 +404,14 @@
          * Bluetooth: BT0-4, CLR
          * Omarchy shortcuts для удобства (Super+* без homerow мода)
          * ---------------------------------------------------------- */
+
         adjust_layer {
             bindings = <
-&sys_reset  &trans       &trans      &trans        &trans        &trans                           &trans      &trans          &trans          &trans          &trans          &sys_reset
-&bootloader &trans       &trans      &trans        &trans        &trans                           &trans      &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4
-// Omarchy: Super+Return=Term  Super+Shift+N=Nvim  Super+W=Close  Super+F=Fullscreen
-&trans      &kp LG(RET)  &omarchy_nvim &kp LG(W)  &kp LG(F)     &trans                           &trans      &trans          &trans          &trans          &trans          &trans
-&trans      &trans       &trans      &trans        &trans        &trans    &trans       &trans     &bt BT_CLR  &out OUT_TOG    &trans          &trans          &trans          &bootloader
-                                      &trans        &trans        &trans    &trans       &trans    &trans
+&sys_reset   &trans       &trans         &trans     &trans     &trans                    &trans      &trans        &trans        &trans        &trans        &sys_reset
+&bootloader  &trans       &trans         &trans     &trans     &trans                    &trans      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans       &kp LG(RET)  &omarchy_nvim  &kp LG(W)  &kp LG(F)  &trans                    &trans      &trans        &trans        &trans        &trans        &trans
+&trans       &trans       &trans         &trans     &trans     &trans  &trans    &trans  &bt BT_CLR  &out OUT_TOG  &trans        &trans        &trans        &bootloader
+                                         &trans     &trans     &trans  &trans    &trans  &trans
             >;
         };
 
@@ -399,13 +430,14 @@
          *   Z=Undo  X=Cut  C=Copy  V=Paste
          *   F=Find (Ctrl+F)
          * ---------------------------------------------------------- */
+
         vim_layer {
             bindings = <
-&trans      &trans          &trans          &trans          &trans          &trans                          &trans      &trans          &trans      &trans          &trans      &trans
-&trans      &trans          &kp LC(RIGHT)   &trans          &trans          &trans                          &kp PG_UP   &kp HOME        &kp UP      &kp END         &kp PG_UP   &trans
-&trans      &kp LC(A)       &kp LC(S)       &kp LS(DEL)     &kp LC(F)       &trans                          &kp LEFT    &kp DOWN        &kp UP      &kp RIGHT       &kp PG_DN   &trans
-&trans      &kp LC(Z)       &kp LC(X)       &kp LC(C)       &kp LC(V)       &kp LC(HOME)  &trans  &trans     &kp LC(END) &trans          &trans      &trans          &trans      &trans
-                                             &trans          &trans          &trans        &trans  &trans     &trans
+&trans  &trans     &trans         &trans       &trans     &trans                          &trans       &trans    &trans  &trans     &trans     &trans
+&trans  &trans     &kp LC(RIGHT)  &trans       &trans     &trans                          &kp PG_UP    &kp HOME  &kp UP  &kp END    &kp PG_UP  &trans
+&trans  &kp LC(A)  &kp LC(S)      &kp LS(DEL)  &kp LC(F)  &trans                          &kp LEFT     &kp DOWN  &kp UP  &kp RIGHT  &kp PG_DN  &trans
+&trans  &kp LC(Z)  &kp LC(X)      &kp LC(C)    &kp LC(V)  &kp LC(HOME)  &trans    &trans  &kp LC(END)  &trans    &trans  &trans     &trans     &trans
+                                  &trans       &trans     &trans        &trans    &trans  &trans
             >;
         };
     };
